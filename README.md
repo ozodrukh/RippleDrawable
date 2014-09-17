@@ -9,7 +9,7 @@ A port of Ripple Effect from Android L to non L devices
 Usage
 -----
 
-===java
+```java
     // Create circular ripple effect to view
     Button view = new Button(MainActivity.this);
     RippleDrawable.createRipple(view, getColor(R.color.material_blue_600));
@@ -22,7 +22,7 @@ Usage
       
     });
     
-===    
+```
 
 
 
