@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-.gradle
-/local.properties
-/.idea/workspace.xml
-/.idea/libraries
-.DS_Store
-/build
-=======
 # Built application files
 *.apk
 *.ap_
@@ -19,6 +11,8 @@
 # Generated files
 bin/
 gen/
+.idea/
+.DS_Store
 
 # Gradle files
 .gradle/
@@ -32,4 +26,3 @@ proguard/
 
 # Log Files
 *.log
->>>>>>> origin/master
