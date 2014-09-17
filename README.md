@@ -3,6 +3,9 @@ RippleDrawable
 
 A port of Ripple Effect from Android L to non L devices
 
+<a href="http://www.youtube.com/watch?feature=player_embedded&v=DxMJxm9qd5c
+" target="_blank"><img src="http://img.youtube.com/vi/DxMJxm9qd5c/0.jpg" 
+alt="Ripple DEMO" width="320" height="240" border="10" /></a>
 
 
 
