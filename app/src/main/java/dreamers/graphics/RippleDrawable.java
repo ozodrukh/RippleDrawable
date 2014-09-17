@@ -147,6 +147,7 @@ public class RippleDrawable extends Drawable implements View.OnTouchListener{
                 onFingerMove(event.getX(), event.getY());
                 break;
             case MotionEvent.ACTION_UP:
+            case MotionEvent.ACTION_CANCEL:
                 onFingerUp();
                 break;
         }
