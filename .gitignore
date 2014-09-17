@@ -11,12 +11,14 @@
 # Generated files
 bin/
 gen/
-.idea/
+.idea
 .DS_Store
+Graphics.iml
 
 # Gradle files
 .gradle/
 build/
+
 
 # Local configuration file (sdk path, etc)
 local.properties
