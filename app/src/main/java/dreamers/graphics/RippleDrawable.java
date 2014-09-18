@@ -1,13 +1,15 @@
 package dreamers.graphics;
 
-import android.animation.Animator;
-import android.animation.ObjectAnimator;
+import com.nineoldandroids.animation.Animator;
+
+import com.nineoldandroids.animation.AnimatorListenerAdapter;
+import com.nineoldandroids.animation.ObjectAnimator;
 import android.graphics.Canvas;
 import android.graphics.ColorFilter;
 import android.graphics.Paint;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.util.Property;
+import com.nineoldandroids.util.Property;
 import android.view.MotionEvent;
 import android.view.View;
 
@@ -72,6 +74,7 @@ public class RippleDrawable extends Drawable implements View.OnTouchListener{
         if(Build.VERSION.SDK_INT >= 16) {
             v.setBackground(rippleDrawable);
         }else{
+            //noinspection deprecation
             v.setBackgroundDrawable(rippleDrawable);
         }
     }
@@ -216,7 +219,7 @@ public class RippleDrawable extends Drawable implements View.OnTouchListener{
 
         mCurrentAnimator = ObjectAnimator.ofFloat(this, DESTROY_TOUCH_RIPPLE, 0f, 1f);
         mCurrentAnimator.setDuration(DEFAULT_ANIM_DURATION);
-        mCurrentAnimator.addListener(new SimpleAnimationListener(){
+        mCurrentAnimator.addListener(new AnimatorListenerAdapter(){
             @Override
             public void onAnimationEnd(Animator animation) {
                 super.onAnimationEnd(animation);

@@ -1,6 +1,7 @@
 package dreamers.graphics;
 
-import android.util.Property;
+
+import com.nineoldandroids.util.Property;
 
 /**
  * An implementation of {@link android.util.Property} to be used specifically with fields of type
