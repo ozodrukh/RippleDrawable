@@ -1,12 +1,12 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 19
     buildToolsVersion "20.0.0"
 
     defaultConfig {
-        applicationId "dreamers.graphics"
-        minSdkVersion 1
+        applicationId "dreamers.sample"
+        minSdkVersion 15
         targetSdkVersion 19
         versionCode 1
         versionName "1.0"
@@ -20,6 +20,10 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.nineoldandroids:library:2.4.0'
+    compile project(':app')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+
+    compile 'com.android.support:cardview-v7:+'
+    compile 'com.android.support:recyclerview-v7:+'
+    compile 'com.android.support:palette-v7:+'
 }
