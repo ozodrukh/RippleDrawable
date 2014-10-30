@@ -1,13 +1,13 @@
 apply plugin: 'com.android.library'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "20.0.0"
+    compileSdkVersion 21
+    buildToolsVersion "21.0.0"
 
     defaultConfig {
         applicationId "dreamers.graphics"
-        minSdkVersion 1
-        targetSdkVersion 19
+        minSdkVersion 7
+        targetSdkVersion 21
         versionCode 1
         versionName "1.0"
     }
@@ -21,5 +21,4 @@ android {
 
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.nineoldandroids:library:2.4.0'
 }
