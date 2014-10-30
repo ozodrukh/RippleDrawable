@@ -13,7 +13,13 @@ Usage
 -----
 
 ```java
-    // Create circular ripple effect to view
+    // New API for scroll containers
+    RippleDrawable.makeFor(View target, ColorStateList colors, boolean parentIsScrollContainer)
+    
+    // For non scroll views
+    RippleDrawable.makeFor(View target, ColorStateList colors);
+
+    // Old api is supported Create circular ripple effect to view
     Button view = new Button(MainActivity.this);
     RippleDrawable.createRipple(view, getColor(R.color.material_blue_600));
     view.setOnClickListener(new OnClickListener(){
