@@ -1,37 +1,51 @@
 package dreamers.sample;
 
 import android.app.Activity;
+import android.content.res.ColorStateList;
 import android.os.Bundle;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewGroup.LayoutParams;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 import dreamers.graphics.RippleDrawable;
-
-import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
-import static android.widget.LinearLayout.HORIZONTAL;
+import dreamers.graphics.TouchTracker;
 
 public class HelloWorld extends Activity{
+
+    ColorStateList stateList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         View decor = getWindow().getDecorView();
-        RippleDrawable.createRipple(decor, 0xffdddddd);
 
-        RecyclerView recyclerView = new RecyclerView(this);
-        setContentView(recyclerView, new LayoutParams(MATCH_PARENT, MATCH_PARENT));
+        ListView recyclerView = new ListView(this);
+        recyclerView.setPadding(20, 20, 20, 20);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(this, HORIZONTAL, false));
-        recyclerView.setAdapter(new RecyclerAdapter());
+        stateList = getResources().getColorStateList(R.color.example_colors_state);
+
+        setContentView(recyclerView);
+
+        recyclerView.setAdapter(new ListAdapter());
+//        recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+//                Toast.makeText(parent.getContext(), position + view.toString(), Toast.LENGTH_SHORT)
+//                        .show();
+//            }
+//        });
+
+
     }
-
 
 
     public static class Holder extends RecyclerView.ViewHolder{
@@ -48,7 +62,7 @@ public class HelloWorld extends Activity{
         }
     }
 
-    public static class RecyclerAdapter extends RecyclerView.Adapter<Holder>{
+    public class RecyclerAdapter extends RecyclerView.Adapter<Holder>{
 
         public List<Integer> mItems = new ArrayList<Integer>();
 
@@ -63,13 +77,15 @@ public class HelloWorld extends Activity{
             View v = LayoutInflater.from(group.getContext())
                     .inflate(R.layout.layout_item, group, false);
 
-            RippleDrawable.createRipple(v, 0xff3f51b5);
             return new Holder(v);
         }
 
         @Override
         public void onBindViewHolder(Holder holder, int i) {
             holder.setText(mItems.get(i));
+            if(!(holder.mNumberView.getBackground() instanceof  RippleDrawable)){
+                RippleDrawable.makeFor(holder.mNumberView, stateList, true);
+            }
         }
 
         @Override
@@ -77,6 +93,39 @@ public class HelloWorld extends Activity{
             return mItems.size();
         }
 
+    }
+
+    class ListAdapter extends BaseAdapter{
+
+        RecyclerAdapter mAdapter = new RecyclerAdapter();
+
+        @Override
+        public int getCount() {
+            return mAdapter.getItemCount();
+        }
+
+        @Override
+        public Object getItem(int position) {
+            return null;
+        }
+
+        @Override
+        public long getItemId(int position) {
+            return mAdapter.getItemId(position);
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+            if(convertView == null){
+                Holder holder =  mAdapter.onCreateViewHolder(parent, position);
+                convertView = holder.itemView;
+                convertView.setTag(holder);
+            }
+
+            mAdapter.onBindViewHolder((Holder) convertView.getTag(), position);
+
+            return convertView;
+        }
     }
 
 }
