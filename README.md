@@ -7,13 +7,22 @@ A port of Ripple Effect from Android L to non L devices
 " target="_blank"><img src="http://img.youtube.com/vi/DxMJxm9qd5c/0.jpg" 
 alt="Ripple DEMO" width="320" height="240" border="10" /></a>
 
+Note
+====
 
+Use RippleDrawable with RecyclerView instead of using ListView or GridView, because of animation not work properly on last ones
 
 Usage
 -----
 
 ```java
-    // Create circular ripple effect to view
+    // New API for scroll containers
+    RippleDrawable.makeFor(View target, ColorStateList colors, boolean parentIsScrollContainer)
+    
+    // For non scroll views
+    RippleDrawable.makeFor(View target, ColorStateList colors);
+
+    // Old api is supported Create circular ripple effect to view
     Button view = new Button(MainActivity.this);
     RippleDrawable.createRipple(view, getColor(R.color.material_blue_600));
     view.setOnClickListener(new OnClickListener(){
