@@ -91,9 +91,9 @@ public class TouchTracker implements View.OnTouchListener{
                     break;
 
                 case MotionEvent.ACTION_DOWN:
+                    mHasPerformedLongPress = false;
 
                     if (mInsideScrollContainer) {
-                        mHasPerformedLongPress = false;
 
                         mPrePressed = true;
                         if (mPendingCheckForTap == null) {
