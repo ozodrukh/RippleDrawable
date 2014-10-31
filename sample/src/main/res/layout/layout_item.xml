@@ -12,6 +12,7 @@
         android:background="@drawable/ic_launcher"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:textColor="@color/example_colors_state_text"
         android:textSize="20sp"
         android:gravity="center"
         android:layout_gravity="center"

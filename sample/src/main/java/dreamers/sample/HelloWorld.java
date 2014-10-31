@@ -3,7 +3,9 @@ package dreamers.sample;
 import android.app.Activity;
 import android.content.res.ColorStateList;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,14 +30,17 @@ public class HelloWorld extends Activity{
         super.onCreate(savedInstanceState);
         View decor = getWindow().getDecorView();
 
-        ListView recyclerView = new ListView(this);
+        RecyclerView recyclerView = new RecyclerView(this);
         recyclerView.setPadding(20, 20, 20, 20);
 
         stateList = getResources().getColorStateList(R.color.example_colors_state);
 
         setContentView(recyclerView);
 
-        recyclerView.setAdapter(new ListAdapter());
+        recyclerView.setAdapter(new RecyclerAdapter());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setItemViewCacheSize(5);
 //        recyclerView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 //            @Override
 //            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -48,13 +53,18 @@ public class HelloWorld extends Activity{
     }
 
 
-    public static class Holder extends RecyclerView.ViewHolder{
+    public class Holder extends RecyclerView.ViewHolder{
 
         TextView mNumberView;
 
         public Holder(View itemView) {
             super(itemView);
             mNumberView = (TextView) itemView.findViewById(R.id.number);
+        }
+
+        public void bindBackground(){
+            mNumberView.setClickable(true);
+            RippleDrawable.makeFor(mNumberView, stateList, true);
         }
 
         public void setText(Number number){
@@ -83,9 +93,7 @@ public class HelloWorld extends Activity{
         @Override
         public void onBindViewHolder(Holder holder, int i) {
             holder.setText(mItems.get(i));
-            if(!(holder.mNumberView.getBackground() instanceof  RippleDrawable)){
-                RippleDrawable.makeFor(holder.mNumberView, stateList, true);
-            }
+            holder.bindBackground();
         }
 
         @Override
