@@ -16,13 +16,14 @@
 
 package com.nineoldandroids.animation;
 
-import android.animation.TimeInterpolator;
+
 import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.util.AndroidRuntimeException;
 import android.view.animation.AccelerateDecelerateInterpolator;
 import android.view.animation.AnimationUtils;
+import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ import java.util.HashMap;
  * <p>By default, ValueAnimator uses non-linear time interpolation, via the
  * {@link AccelerateDecelerateInterpolator} class, which accelerates into and decelerates
  * out of an animation. This behavior can be changed by calling
- * {@link ValueAnimator#setInterpolator(TimeInterpolator)}.</p>
+ * {@link ValueAnimator#setInterpolator(Interpolator)}.</p>
  */
 public class ValueAnimator extends Animator {
 
@@ -141,7 +142,7 @@ public class ValueAnimator extends Animator {
             };
 
     // The time interpolator to be used if none is set on the animation
-    private static final TimeInterpolator sDefaultInterpolator =
+    private static final android.view.animation.Interpolator sDefaultInterpolator =
             new AccelerateDecelerateInterpolator();
 
     // type evaluators for the primitive types handled by this implementation
@@ -237,7 +238,7 @@ public class ValueAnimator extends Animator {
      * through this interpolator to calculate the interpolated fraction, which is then used to
      * calculate the animated values.
      */
-    private TimeInterpolator mInterpolator = sDefaultInterpolator;
+    private Interpolator mInterpolator = sDefaultInterpolator;
 
     /**
      * The set of listeners to be sent events through the life of an animation.
@@ -861,7 +862,7 @@ public class ValueAnimator extends Animator {
      * will result in linear interpolation.
      */
     @Override
-    public void setInterpolator(TimeInterpolator value) {
+    public void setInterpolator(Interpolator value) {
         if (value != null) {
             mInterpolator = value;
         } else {
@@ -874,7 +875,7 @@ public class ValueAnimator extends Animator {
      *
      * @return The timing interpolator for this ValueAnimator.
      */
-    public TimeInterpolator getInterpolator() {
+    public Interpolator getInterpolator() {
         return mInterpolator;
     }
 

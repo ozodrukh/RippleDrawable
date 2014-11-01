@@ -1,11 +1,11 @@
 package dreamers.graphics;
 
-import android.animation.TimeInterpolator;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.graphics.Rect;
+import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 
 import com.nineoldandroids.animation.Animator;
@@ -16,7 +16,7 @@ import com.nineoldandroids.animation.ObjectAnimator;
  * Draws a Material ripple.
  */
 class RippleBackground {
-    private static final TimeInterpolator LINEAR_INTERPOLATOR = new LinearInterpolator();
+    private static final Interpolator LINEAR_INTERPOLATOR = new LinearInterpolator();
 
     private static final float GLOBAL_SPEED = 1.0f;
     private static final float WAVE_OPACITY_DECAY_VELOCITY = 3.0f / GLOBAL_SPEED;

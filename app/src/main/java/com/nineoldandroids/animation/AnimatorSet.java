@@ -231,7 +231,7 @@ public final class AnimatorSet extends Animator {
      * @param interpolator the interpolator to be used by each child animation of this AnimatorSet
      */
     @Override
-    public void setInterpolator(TimeInterpolator interpolator) {
+    public void setInterpolator(Interpolator interpolator) {
         for (Node node : mNodes) {
             node.animation.setInterpolator(interpolator);
         }

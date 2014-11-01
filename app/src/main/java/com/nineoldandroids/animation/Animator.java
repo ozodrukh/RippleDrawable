@@ -17,6 +17,7 @@
 package com.nineoldandroids.animation;
 
 import android.animation.TimeInterpolator;
+import android.view.animation.Interpolator;
 
 import java.util.ArrayList;
 
@@ -178,14 +179,14 @@ public abstract class Animator implements Cloneable {
      *
      * @param value the interpolator to be used by this animation
      */
-    public abstract void setInterpolator(TimeInterpolator value);
+    public abstract void setInterpolator(Interpolator value);
 
     /**
      * Returns the timing interpolator that this animation uses.
      *
      * @return The timing interpolator for this animation.
      */
-    public TimeInterpolator getInterpolator() {
+    public Interpolator getInterpolator() {
         return null;
     }
 
