@@ -232,6 +232,7 @@ public class TouchTracker implements View.OnTouchListener{
             if (target.isPressed() && (target.getParent() != null)) {
                 if (target.performLongClick()) {
                     mHasPerformedLongPress = true;
+                    mPrePressed = false;
                 }
             }
         }
