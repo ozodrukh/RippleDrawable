@@ -38,7 +38,9 @@ Usage
     
 ```
 
+Add following in proguard rules to ensure that ripple effect works in release package.
 
+    -keep class dreamers.graphics.** {*;}
 
 License
 --------
