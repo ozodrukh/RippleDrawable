@@ -12,6 +12,11 @@ alt="Ripple DEMO" width="320" height="240" border="10" /></a>
 Note
 ====
 
+##Upcoming Features
+1. XML support
+2. different shapes support
+3. some more stuffs :)
+
 Use RippleDrawable with RecyclerView instead of using ListView or GridView, because of animation not work properly on last ones
 
 Usage
