@@ -35,7 +35,7 @@ License
 
     The MIT License (MIT)
 
-    Copyright (c) 2014 Abdullaev Ozodrukh
+    Copyright (c) 2015 Abdullaev Ozodrukh
     
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
