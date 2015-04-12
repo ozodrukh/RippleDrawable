@@ -1,8 +1,12 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="android:Theme.Holo.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat">
         <!-- Customize your theme here. -->
     </style>
+
+    <declare-styleable name="CardViewWithBackgroundSupport">
+        <attr name="android:background"/>
+    </declare-styleable>
 
 </resources>

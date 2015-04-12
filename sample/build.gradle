@@ -1,19 +1,18 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 19
-    buildToolsVersion "20.0.0"
+    compileSdkVersion 22
+    buildToolsVersion "21.1.2"
 
     defaultConfig {
         applicationId "dreamers.sample"
-        minSdkVersion 15
-        targetSdkVersion 19
+        minSdkVersion 14
+        targetSdkVersion 22
         versionCode 1
         versionName "1.0"
     }
     buildTypes {
         release {
-            runProguard false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -23,7 +22,6 @@ dependencies {
     compile project(':app')
     compile fileTree(dir: 'libs', include: ['*.jar'])
 
-    compile 'com.android.support:cardview-v7:+'
-    compile 'com.android.support:recyclerview-v7:+'
-    compile 'com.android.support:palette-v7:+'
+    compile 'com.android.support:cardview-v7:22.0.0'
+    compile 'com.android.support:recyclerview-v7:22.0.0'
 }
