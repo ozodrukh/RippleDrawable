@@ -1,43 +1,33 @@
-[![Android Arsenal](https://img.shields.io/badge/Android%20Arsenal-RippleDrawable-red.svg?style=flat)](https://android-arsenal.com/details/1/957)
 
-RippleDrawable
-=====
+*RippleDrawable*
+=============
+This repository contains post of Android `<ripple>` effect for pre lollipop devices with android 14 + (ICS+)
 
-A port of Ripple Effect from Android L to non L devices
+### Features
+1. XML inflating (working on)
+2. Ripple supports different shapes
+3. Custom drawable loader
+4. Define your custom drawable tags
 
-<a href="http://www.youtube.com/watch?feature=player_embedded&v=DxMJxm9qd5c
-" target="_blank"><img src="http://img.youtube.com/vi/DxMJxm9qd5c/0.jpg" 
-alt="Ripple DEMO" width="320" height="240" border="10" /></a>
+#### Implementation
 
-Note
-====
+create this file in your drawables/ or drawables-v14/ folder
+```xml
+<?xml version="1.0" encoding="utf-8"?>
+<ripple
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:color="@color/ripple_material_light">
 
-Use RippleDrawable with RecyclerView instead of using ListView or GridView, because of animation not work properly on last ones
+    <!-- for fab -->
+    <item>
+        <shape android:shape="oval">
+            <solid android:color="@color/accent_material_dark"/>
+        </shape>
+    </item>
 
-Usage
------
+</ripple>
 
-```java
-    // New API for scroll containers
-    RippleDrawable.makeFor(View target, ColorStateList colors, boolean parentIsScrollContainer)
-    
-    // For non scroll views
-    RippleDrawable.makeFor(View target, ColorStateList colors);
-
-    // Old api is supported Create circular ripple effect to view
-    Button view = new Button(MainActivity.this);
-    RippleDrawable.createRipple(view, getColor(R.color.material_blue_600));
-    view.setOnClickListener(new OnClickListener(){
-      
-      @Override
-      public void onClick(View v){
-        Toast.makeText(MainActivity.this, "Clicked", Toast.LENGTH_SHORT).show();
-      }
-      
-    });
-    
 ```
-
 
 
 License
