@@ -10,4 +10,11 @@
         android:layout_width="192dp"
         android:layout_height="192dp"/>
 
+    <dreamers.sample.FloatingActionButton
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="right|bottom"
+        android:layout_margin="16dp"
+        />
+
 </FrameLayout>

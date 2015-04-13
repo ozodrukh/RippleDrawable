@@ -23,11 +23,11 @@ public class CardViewWithBackgroundSupport extends CardView {
         super(context, attrs, defStyle);
 
         android.util.Log.i("CardViewCompat", context.toString());
+        android.util.Log.i("CardViewCompat", getResources().toString());
 
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.CardViewWithBackgroundSupport);
         setBackground(array.getDrawable(R.styleable.CardViewWithBackgroundSupport_android_background));
         array.recycle();
-
     }
 
     @Override

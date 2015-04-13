@@ -28,8 +28,7 @@
         android:layout_height="56dp"
         android:layout_gravity="right|bottom"
         android:layout_margin="16dp"
-
-        android:src="@drawable/category_movies"
+        android:background="@drawable/fab_background"
         />
 
 </FrameLayout>

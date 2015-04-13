@@ -18,7 +18,11 @@ public class ResourcesCompat extends Resources {
     public ResourcesCompat(Context context){
         this(context.getResources());
 
-//        mTheme = context.getTheme();
+        try{
+            mTheme = context.getTheme();
+        }catch (NullPointerException ignored){
+            //todo what to on exception? how to set theme, cause it's really important
+        }
     }
 
     public ResourcesCompat(Resources resources) {
