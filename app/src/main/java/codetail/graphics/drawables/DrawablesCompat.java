@@ -29,6 +29,7 @@ import codetail.graphics.compat.Android;
 
 
 public class DrawablesCompat {
+    private static final String TAG = "DrawablesCompat";
     private static final Object mAccessLock = new Object();
 
     private static final Map<String, Class<? extends Drawable>> CLASS_MAP = new HashMap<>();
@@ -144,6 +145,10 @@ public class DrawablesCompat {
     public static Drawable createFromXmlInner(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
         Drawable drawable = null;
         final String name = parser.getName();
+        if(name.contains("ripple")){
+            Log.i(TAG, "**** Creating RippleDrawable ****");
+        }
+
         try {
             Class<? extends Drawable> clazz = CLASS_MAP.get(name);
             if (clazz != null) {
@@ -181,7 +186,14 @@ public class DrawablesCompat {
 
     public static Drawable getDrawable(Resources res, int resid, Resources.Theme theme) {
 
-        Log.i("ResourcesCompat", res.getResourceName(resid));
+
+        //TODO remove
+        String resName = res.getResourceName(resid);
+        Log.i("ResourcesCompat", resName);
+
+        if(resName.contains("list_selector")){
+            Log.i("ResourcesCompat", resName);
+        }
 
         TypedValue value = new TypedValue();
         res.getValue(resid, value, true);
