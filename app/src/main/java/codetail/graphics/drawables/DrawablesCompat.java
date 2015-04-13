@@ -28,6 +28,21 @@ import java.util.Map;
 import codetail.graphics.compat.Android;
 
 
+/**
+ * There is custom implementation of {@link Resources#getDrawable(int)} and
+ * {@link Resources} loadDrawable methods, it needs to support custom xml tags defining
+ *
+ * to register custom Drawable tag follow the example below:
+ * <pre>
+ *     static{
+ *          DrawablesCompat.registerDrawable(RippleDrawable.class, "ripple");
+ *     }
+ * </pre>
+ *
+ * There is also some helpful methods that {@link android.support.v4.graphics.drawable.DrawableCompat}
+ * doesn't supported, if you want to create universal Drawables that all methods will works on both
+ * 5.0 + and lower, extend your custom drawable from {@link LollipopDrawable}
+ */
 public class DrawablesCompat {
     private static final String TAG = "DrawablesCompat";
     private static final Object mAccessLock = new Object();
