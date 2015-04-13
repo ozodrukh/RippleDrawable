@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.telly.mrvector.MrVector;
 
+import codetail.graphics.compat.DrawablesContext;
+
 public class MyApp extends Application {
 
     static {
@@ -13,7 +15,7 @@ public class MyApp extends Application {
 
     @Override
     protected void attachBaseContext(Context base) {
-        super.attachBaseContext(MrVector.wrap(base));
+        super.attachBaseContext(new DrawablesContext(base));
     }
 
 }

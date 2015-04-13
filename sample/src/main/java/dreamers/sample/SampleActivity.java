@@ -11,7 +11,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
-import com.telly.mrvector.MrVector;
+import codetail.graphics.compat.DrawablesContext;
+import codetail.graphics.compat.ResourcesCompat;
 
 public class SampleActivity extends ActionBarActivity {
 
@@ -28,7 +29,16 @@ public class SampleActivity extends ActionBarActivity {
 
     @Override
     protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(MrVector.wrap(newBase));
+        super.attachBaseContext(new DrawablesContext(this));
+    }
+
+    @Override
+    public ResourcesCompat getResources() {
+        ResourcesCompat compat = (ResourcesCompat) super.getResources();
+        if(compat.getTheme() == null) {
+            compat.setTheme(getTheme());
+        }
+        return compat;
     }
 
     @Override

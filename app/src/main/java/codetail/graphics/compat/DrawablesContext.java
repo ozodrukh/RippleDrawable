@@ -11,6 +11,12 @@ public class DrawablesContext extends ContextWrapper{
     public DrawablesContext(Context base) {
         super(base);
         mWrapped = new ResourcesCompat(base);
+
+        try{
+            mWrapped.setTheme(base.getTheme());
+        }catch (NullPointerException ignored){
+            //todo what to on exception? how to set theme, cause it's really important
+        }
     }
 
     public Resources getBaseResources() {
