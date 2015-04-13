@@ -43,7 +43,7 @@ public class TouchTracker implements View.OnTouchListener{
         if(v.isClickable() || v.isLongClickable()) {
             switch (event.getAction()) {
                 case MotionEvent.ACTION_UP:
-                    if (mPrePressed || v.isPressed()) {
+                    if ((mPrePressed && pointInView(v, x, y, mTouchSlop)) || v.isPressed()) {
                         // take focus if we don't have it already and we should in
                         // touch mode.
                         boolean focusTaken = false;
@@ -240,6 +240,7 @@ public class TouchTracker implements View.OnTouchListener{
             if (target.isPressed() && (target.getParent() != null)) {
                 if (target.performLongClick()) {
                     mHasPerformedLongPress = true;
+                    mPrePressed = false;
                 }
             }
         }
