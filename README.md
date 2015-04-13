@@ -1,3 +1,5 @@
+### I'm sorry it was an accident to merge with dev branch, it is unstable version, if you could help how to revert changes, please do Pull Request
+
 
 *RippleDrawable*
 =============
