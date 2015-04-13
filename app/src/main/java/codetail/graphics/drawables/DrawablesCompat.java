@@ -324,6 +324,7 @@ public class DrawablesCompat {
         void inflate(Drawable drawable, Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException;
     }
 
+    //fixed method not found exception, caused by old Drawable class, casted to LollipopDrawable class
     static class BaseDrawableImpl implements IDrawable {
 
         @Override
