@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:auto="http://schemas.android.com/apk/res-auto"
+    auto:width="24dp"
+    auto:height="24dp"
+    auto:viewportWidth="24"
+    auto:viewportHeight="24"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+
+    <group>
+        <path
+            	auto:fillColor="#000000"
+		android:fillColor="#000000"
+            	auto:pathData="M18,3 L18,5 L16,5 L16,3 L8,3 L8,5 L6,5 L6,3 L4,3 L4,21 L6,21 L6,19 L8,19 L8,21 
+L16,21 L16,19 L18,19 L18,21 L20,21 L20,3 L18,3 L18,3 Z M8,17 L6,17 L6,15 L8,15 
+L8,17 L8,17 Z M8,13 L6,13 L6,11 L8,11 L8,13 L8,13 Z M8,9 L6,9 L6,7 L8,7 L8,9 
+L8,9 Z M18,17 L16,17 L16,15 L18,15 L18,17 L18,17 Z M18,13 L16,13 L16,11 L18,11 
+L18,13 L18,13 Z M18,9 L16,9 L16,7 L18,7 L18,9 L18,9 Z"
+		android:pathData="M18,3 L18,5 L16,5 L16,3 L8,3 L8,5 L6,5 L6,3 L4,3 L4,21 L6,21 L6,19 L8,19 L8,21 
+L16,21 L16,19 L18,19 L18,21 L20,21 L20,3 L18,3 L18,3 Z M8,17 L6,17 L6,15 L8,15 
+L8,17 L8,17 Z M8,13 L6,13 L6,11 L8,11 L8,13 L8,13 Z M8,9 L6,9 L6,7 L8,7 L8,9 
+L8,9 Z M18,17 L16,17 L16,15 L18,15 L18,17 L18,17 Z M18,13 L16,13 L16,11 L18,11 
+L18,13 L18,13 Z M18,9 L16,9 L16,7 L18,7 L18,9 L18,9 Z" />
+        <path
+            	auto:pathData="M0,0 L24,0 L24,24 L0,24 L0,0 Z"
+		android:pathData="M0,0 L24,0 L24,24 L0,24 L0,0 Z" />
+    </group>
+</vector>

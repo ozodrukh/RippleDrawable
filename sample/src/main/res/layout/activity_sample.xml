@@ -4,10 +4,16 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
+
+    <!--
+     android:listSelector="@drawable/list_selector"
+     android:background="@drawable/fab_background"
+    -->
+
     <ListView
         android:id="@+id/list"
         android:padding="8dp"
-        android:listSelector="@drawable/list_selector"
+
         android:clipChildren="true"
         android:clipToPadding="false"
         android:overScrollMode="always"
@@ -22,8 +28,8 @@
         android:layout_height="56dp"
         android:layout_gravity="right|bottom"
         android:layout_margin="16dp"
-        android:background="@drawable/fab_background"
-        android:src="@drawable/abc_ic_search_api_mtrl_alpha"
+
+        android:src="@drawable/category_movies"
         />
 
 </FrameLayout>

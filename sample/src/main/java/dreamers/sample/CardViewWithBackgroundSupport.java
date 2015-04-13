@@ -22,6 +22,8 @@ public class CardViewWithBackgroundSupport extends CardView {
     public CardViewWithBackgroundSupport(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
 
+        android.util.Log.i("CardViewCompat", context.toString());
+
         TypedArray array = context.obtainStyledAttributes(attrs, R.styleable.CardViewWithBackgroundSupport);
         setBackground(array.getDrawable(R.styleable.CardViewWithBackgroundSupport_android_background));
         array.recycle();
@@ -52,8 +54,8 @@ public class CardViewWithBackgroundSupport extends CardView {
     @Override
     public void setBackground(Drawable background) {
         if (mBackground != null) {
-            mBackground.setCallback(null);
             unscheduleDrawable(mBackground);
+            mBackground.setCallback(null);
         }
 
         mBackground = background;

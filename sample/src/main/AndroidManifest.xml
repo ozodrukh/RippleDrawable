@@ -2,6 +2,7 @@
           package="dreamers.sample">
 
     <application android:allowBackup="true"
+        android:name=".MyApp"
         android:label="@string/app_name"
         android:icon="@drawable/ic_launcher"
         android:theme="@style/AppTheme">
