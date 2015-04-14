@@ -17,8 +17,6 @@ public class FloatingActionButton extends ImageButton{
 
     public FloatingActionButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
-
-        setBackgroundResource(R.drawable.fab_background);
     }
 
 }
