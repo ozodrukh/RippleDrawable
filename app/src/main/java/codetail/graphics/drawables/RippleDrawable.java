@@ -441,7 +441,8 @@ public class RippleDrawable extends LayerDrawable {
         // Extract the theme attributes, if any.
         state.mTouchThemeAttrs = TypedArrayCompat.extractThemeAttrs(a);
 
-        final ColorStateList color = TypedArrayCompat.getColorStateList(theme, a, values, R.styleable.RippleDrawable_android_color);
+        final ColorStateList color = TypedArrayCompat.getColorStateList(theme, a, values,
+                R.styleable.RippleDrawable_android_color);
 
         if (color != null) {
             mState.mColor = color;

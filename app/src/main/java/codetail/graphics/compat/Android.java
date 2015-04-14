@@ -5,6 +5,9 @@ import android.os.Build;
 import static android.os.Build.VERSION_CODES.KITKAT;
 import static android.os.Build.VERSION_CODES.LOLLIPOP;
 
+/**
+ * Helper class to avoid boilerplate Build version checks
+ */
 public class Android {
     public static int VERSION = Build.VERSION.SDK_INT;
 

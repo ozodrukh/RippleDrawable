@@ -8,7 +8,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.DrawableRes;
 import android.support.v4.util.LongSparseArray;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -75,9 +74,13 @@ public class DrawablesCompat {
         CLASS_MAP.remove(name);
     }
 
-    public static void setRippleDrawable(@DrawableRes int id, View target) {
-        target.setBackgroundResource(id);
-        target.setOnTouchListener(new TouchTracker());
+    /**
+     * Sets all dependencies, that are necessary for {@link RippleDrawable} work
+     */
+    public static void installRippleDependencies(View target, boolean isInScrollContainer){
+        TouchTracker tracker = new TouchTracker();
+        tracker.setInsideScrollContainer(isInScrollContainer);
+        target.setOnTouchListener(tracker);
     }
 
     /**
@@ -201,14 +204,9 @@ public class DrawablesCompat {
 
     public static Drawable getDrawable(Resources res, int resid, Resources.Theme theme) {
 
-
         //TODO remove
         String resName = res.getResourceName(resid);
-        Log.i("ResourcesCompat", resName);
-
-        if(resName.contains("list_selector")){
-            Log.i("ResourcesCompat", resName);
-        }
+        Log.i("ResourcesCompat", "Theme: " + theme.toString() + ", Resource name" + resName);
 
         TypedValue value = new TypedValue();
         res.getValue(resid, value, true);

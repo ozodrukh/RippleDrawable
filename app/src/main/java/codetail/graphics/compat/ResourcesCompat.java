@@ -10,6 +10,12 @@ import android.util.DisplayMetrics;
 
 import codetail.graphics.drawables.DrawablesCompat;
 
+/**
+ * Backport of {@link Resources},
+ *
+ * Main changes are:
+ *  - {@link #setTheme(Theme)} Theme of current activity
+ */
 public class ResourcesCompat extends Resources {
 
     private Theme mTheme;
