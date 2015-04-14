@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Background Drawable of View's -->
+    <attr name="backgroundCompat" format="reference" />
+    <!-- Drawable used to show image in ImageView. -->
+    <attr name="srcCompat" format="reference" />
+    <!-- Extra attribute for RippleDrawable, to add support of scroll containers -->
+    <attr name="isInScrollContainer" format="boolean" />
+
     <!-- Drawable used to show animated touch feedback. -->
     <declare-styleable name="RippleDrawable">
         <!-- The color to use for ripple effects. This attribute is required. -->
