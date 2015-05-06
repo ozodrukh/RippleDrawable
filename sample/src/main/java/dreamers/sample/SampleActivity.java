@@ -1,21 +1,21 @@
 package dreamers.sample;
 
-import android.content.Context;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
-import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
-import com.telly.mrvector.MrVector;
+import codetail.graphics.compat.ResourcesCompat;
 
 public class SampleActivity extends ActionBarActivity {
 
     ListView mListView;
+
+    ResourcesCompat mWrappedResources;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,16 +27,12 @@ public class SampleActivity extends ActionBarActivity {
     }
 
     @Override
-    protected void attachBaseContext(Context newBase) {
-        super.attachBaseContext(MrVector.wrap(newBase));
-    }
-
-    @Override
-    public View onCreateView(View parent, String name, Context context, AttributeSet attrs) {
-        if(name.contains("ListView")) {
-            Log.i("SampleActivity", context.toString());
+    public Resources getResources() {
+        if (mWrappedResources == null) {
+            mWrappedResources = new ResourcesCompat(super.getResources());
         }
-        return super.onCreateView(parent, name, context, attrs);
+
+        return mWrappedResources;
     }
 
     static class ListAdapter extends BaseAdapter {
