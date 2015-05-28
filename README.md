@@ -3,22 +3,25 @@
 =============
 This repository contains post of Android `<ripple>` effect for pre lollipop devices with android 14 + (ICS+)
 
+(well, since NineOldAndroids is deprecated, this library become 14 + only, furthermore gingerbread devices is not spread now)
+
 ### Features
-1. XML inflating (working on)
+1. XML inflating
 2. Ripple supports different shapes
 3. Custom drawable loader
 4. Define your custom drawable tags
 
 #### Implementation
 
-create this file in your drawables/ or drawables-v14/ folder
+Create your desirable ripple.xml in `drawable/` folder
+
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
 <ripple
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:color="@color/ripple_material_light">
+    android:color="@color/ripple_material_light">     <!-- ripple color -->
 
-    <!-- for fab -->
+    <!-- for Floating Action Button -->
     <item>
         <shape android:shape="oval">
             <solid android:color="@color/accent_material_dark"/>
@@ -29,6 +32,64 @@ create this file in your drawables/ or drawables-v14/ folder
 
 ```
 
+Secondly we need to inflate `RippleDrawable` and intercept `View` touches
+see `LollipopDrawablesCompat` and `DrawableHotspotTouch` for inflating and interception sequently. Here is sample:
+
+```java
+
+public class SampleActivity extends AppCompatActivity {
+
+    private FloatingActionButton mActionButton;
+
+      @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_sample);
+        
+        mActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        mActionButton.setBackgroundDrawable(getDrawable2(R.drawable.fab_background));
+        mActionButton.setClickable(true);// if we don't set it true, ripple will not be played
+        mActionButton.setOnTouchListener(
+                new DrawableHotspotTouch((LollipopDrawable) mActionButton.getBackground()));
+    }
+    
+/**
+     * {@link #getDrawable(int)} is already taken by Android API
+     * and method is final, so we need to give another name :(
+     */
+    public Drawable getDrawable2(int id){
+        return LollipopDrawablesCompat.getDrawable(getResources(), id, getTheme());
+    }
+}
+
+```
+
+**Thats it!**
+
+#### a little bit more
+
+you can inflate and create your own `Drawable`classes, here is tips & tricks
+
+1 extend your Drawable from `LollipopDrawable`
+```java
+    public class LayerDrawable extends LollipopDrawable {
+```
+
+2 implement your own inflation
+```java
+    public void inflate(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme);
+```
+3 Register your `LollipopDrawable`
+```java
+static {   
+    LollipopDrawablesCompat.registerDrawable(RippleDrawable.class, "ripple");
+}
+```
+
+4 inflate it!
+```java
+    LollipopDrawablesCompat.getDrawable(getResources(), R.drawable.custom_drawable, getTheme());
+```
 
 License
 --------
@@ -54,4 +115,5 @@ License
     LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
     OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
     THE SOFTWARE.
+
 

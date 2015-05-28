@@ -34,6 +34,10 @@ public class SampleActivity extends ActionBarActivity {
                 new DrawableHotspotTouch((LollipopDrawable) mActionButton.getBackground()));
     }
 
+    /**
+     * {@link #getDrawable(int)} is already taken by Android API
+     * and method is final, so we need to give another name :(
+     */
     public Drawable getDrawable2(int id){
         return LollipopDrawablesCompat.getDrawable(getResources(), id, getTheme());
     }
