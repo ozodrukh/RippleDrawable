@@ -23,8 +23,6 @@ import java.lang.ref.WeakReference;
 import java.util.HashMap;
 import java.util.Map;
 
-import codetail.graphics.compat.Android;
-
 
 public class LollipopDrawablesCompat {
     private static final Object mAccessLock = new Object();

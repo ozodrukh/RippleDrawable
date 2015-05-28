@@ -1,4 +1,4 @@
-package codetail.graphics.compat;
+package codetail.graphics.drawables;
 
 
 import android.annotation.TargetApi;
@@ -9,11 +9,9 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.TypedValue;
 
-import codetail.graphics.drawables.LollipopDrawablesCompat;
-
 import static android.util.TypedValue.TYPE_ATTRIBUTE;
 
-public class TypedArrayCompat {
+class TypedArrayCompat {
     private static final int[] TEMP_ARRAY = new int[1];
 
     private final static ITypedArray IMPL;

@@ -3,22 +3,18 @@ package codetail.graphics.drawables;
 import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.animation.ObjectAnimator;
+import android.animation.TimeInterpolator;
 import android.graphics.Canvas;
 import android.graphics.Paint;
-import android.graphics.Paint.Style;
 import android.graphics.Rect;
-import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
-
-import codetail.graphics.animation.AnimatorsCompat;
-
 
 /**
  * Draws a Material ripple.
  */
 class Ripple {
-    private static final LinearInterpolator LINEAR_INTERPOLATOR = new LinearInterpolator();
-    private static final LogInterpolator DECEL_INTERPOLATOR = new LogInterpolator();
+    private static final TimeInterpolator LINEAR_INTERPOLATOR = new LinearInterpolator();
+    private static final TimeInterpolator DECEL_INTERPOLATOR = new LogInterpolator();
 
     private static final float GLOBAL_SPEED = 1.0f;
     private static final float WAVE_TOUCH_DOWN_ACCELERATION = 1024.0f * GLOBAL_SPEED;
@@ -31,9 +27,6 @@ class Ripple {
 
     /** Bounds used for computing max radius. */
     private final Rect mBounds;
-
-    /** Full-opacity color for drawing this ripple. */
-    private int mColorOpaque;
 
     /** Maximum ripple radius. */
     private float mOuterRadius;
@@ -82,10 +75,8 @@ class Ripple {
         mStartingY = startingY;
     }
 
-    public void setup(int maxRadius, int color, float density) {
-        mColorOpaque = color | 0xFF000000;
-
-        if (maxRadius != -1) {
+    public void setup(int maxRadius, float density) {
+        if (maxRadius != RippleDrawable.RADIUS_AUTO) {
             mHasMaxRadius = true;
             mOuterRadius = maxRadius;
         } else {
@@ -174,36 +165,24 @@ class Ripple {
      * Draws the ripple centered at (0,0) using the specified paint.
      */
     public boolean draw(Canvas c, Paint p) {
-        final boolean hasContent;
-        hasContent = drawSoftware(c, p);
-
-        return hasContent;
-    }
-
-    private boolean drawSoftware(Canvas c, Paint p) {
         boolean hasContent = false;
 
-        p.setColor(mColorOpaque);
-        final int alpha = (int) (255 * mOpacity + 0.5f);
-        final float radius = lerp(0, mOuterRadius, mTweenRadius);
+        final int paintAlpha = p.getAlpha();
+        final int alpha = (int) (paintAlpha * mOpacity + 0.5f);
+        final float radius = MathUtils.lerp(0, mOuterRadius, mTweenRadius);
         if (alpha > 0 && radius > 0) {
-            final float x = lerp(
+            final float x = MathUtils.lerp(
                     mClampedStartingX - mBounds.exactCenterX(), mOuterX, mTweenX);
-            final float y = lerp(
+            final float y = MathUtils.lerp(
                     mClampedStartingY - mBounds.exactCenterY(), mOuterY, mTweenY);
             p.setAlpha(alpha);
-            p.setStyle(Style.FILL);
             c.drawCircle(x, y, radius, p);
+            p.setAlpha(paintAlpha);
             hasContent = true;
         }
 
         return hasContent;
     }
-
-    public static float lerp(float start, float stop, float amount) {
-        return start + (stop - start) * amount;
-    }
-
     /**
      * Returns the maximum bounds of the ripple relative to the ripple center.
      */
@@ -256,6 +235,10 @@ class Ripple {
         // Enter animations always run on the UI thread, since it's unlikely
         // that anything interesting is happening until the user lifts their
         // finger.
+        radius.start();
+        cX.start();
+        cY.start();
+
         AnimatorsCompat.startWithAutoCancel(radius);
         AnimatorsCompat.startWithAutoCancel(cX);
         AnimatorsCompat.startWithAutoCancel(cY);
@@ -265,9 +248,7 @@ class Ripple {
      * Starts the exit animation.
      */
     public void exit() {
-        cancel();
-
-        final float radius = lerp(0, mOuterRadius, mTweenRadius);
+        final float radius = MathUtils.lerp(0, mOuterRadius, mTweenRadius);
         final float remaining;
         if (mAnimRadius != null && mAnimRadius.isRunning()) {
             remaining = mOuterRadius - radius;
@@ -275,15 +256,13 @@ class Ripple {
             remaining = mOuterRadius;
         }
 
+        cancel();
+
         final int radiusDuration = (int) (1000 * Math.sqrt(remaining / (WAVE_TOUCH_UP_ACCELERATION
                 + WAVE_TOUCH_DOWN_ACCELERATION) * mDensity) + 0.5);
         final int opacityDuration = (int) (1000 * mOpacity / WAVE_OPACITY_DECAY_VELOCITY + 0.5f);
 
         exitSoftware(radiusDuration, opacityDuration);
-    }
-
-    public boolean isHardwareAnimating() {
-        return false;
     }
 
     /**
@@ -318,10 +297,11 @@ class Ripple {
         }
     }
 
-    private Paint getTempPaint() {
+    private Paint getTempPaint(Paint original) {
         if (mTempPaint == null) {
             mTempPaint = new Paint();
         }
+        mTempPaint.set(original);
         return mTempPaint;
     }
 
@@ -405,9 +385,9 @@ class Ripple {
     };
 
     /**
-    * Interpolator with a smooth log deceleration
-    */
-    private static final class LogInterpolator implements Interpolator {
+     * Interpolator with a smooth log deceleration
+     */
+    private static final class LogInterpolator implements TimeInterpolator {
         @Override
         public float getInterpolation(float input) {
             return 1 - (float) Math.pow(400, -input * 1.4);

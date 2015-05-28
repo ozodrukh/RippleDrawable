@@ -39,12 +39,10 @@ import org.xmlpull.v1.XmlPullParserException;
 
 import java.io.IOException;
 
-import codetail.graphics.compat.Android;
-import codetail.graphics.compat.TypedArrayCompat;
 import dreamers.graphics.R;
 
-import static codetail.graphics.compat.TypedArrayCompat.getDimensionPixelOffset;
-import static codetail.graphics.compat.TypedArrayCompat.getResourceId;
+import static codetail.graphics.drawables.TypedArrayCompat.getDimensionPixelOffset;
+import static codetail.graphics.drawables.TypedArrayCompat.getResourceId;
 
 /**
  * A Drawable that manages an array of other Drawables. These are drawn in array

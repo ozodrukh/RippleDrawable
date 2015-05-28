@@ -1,4 +1,4 @@
-package codetail.graphics.animation;
+package codetail.graphics.drawables;
 
 import android.animation.Animator;
 import android.animation.ObjectAnimator;
@@ -9,7 +9,7 @@ import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
 
-public class AnimatorsCompat {
+class AnimatorsCompat {
 
     static List<WeakReference<ObjectAnimator>> sRunningAnimators = new ArrayList<>();
 

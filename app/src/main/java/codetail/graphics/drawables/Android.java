@@ -1,4 +1,4 @@
-package codetail.graphics.compat;
+package codetail.graphics.drawables;
 
 import android.os.Build;
 
@@ -10,7 +10,7 @@ import static android.os.Build.VERSION_CODES.LOLLIPOP;
  *
  * @hide
  */
-public class Android {
+class Android {
     public static int VERSION = Build.VERSION.SDK_INT;
 
     /**
