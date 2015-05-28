@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
-        android:color="?attr/colorControlHighlight">
+        android:color="@color/accent_material_dark">
 
     <item android:id="@android:id/mask">
-        <color android:color="@android:color/white"/>
+        <color android:color="@color/cardview_dark_background"/>
     </item>
 
 </ripple>

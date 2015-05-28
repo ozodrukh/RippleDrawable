@@ -17,6 +17,7 @@ public class FloatingActionButton extends ImageButton{
 
     public FloatingActionButton(Context context, AttributeSet attrs, int defStyle) {
         super(context, attrs, defStyle);
+        setScaleType(ScaleType.CENTER_INSIDE);
     }
 
 }

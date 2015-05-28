@@ -1,6 +1,6 @@
 package dreamers.sample;
 
-import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
@@ -9,13 +9,12 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
-import codetail.graphics.compat.ResourcesCompat;
+import codetail.graphics.drawables.LollipopDrawablesCompat;
 
 public class SampleActivity extends ActionBarActivity {
 
-    ListView mListView;
-
-    ResourcesCompat mWrappedResources;
+    private ListView mListView;
+    private FloatingActionButton mActionButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,16 +22,17 @@ public class SampleActivity extends ActionBarActivity {
         setContentView(R.layout.activity_sample);
 
         mListView = (ListView) findViewById(R.id.list);
+        mListView.setSelector(getDrawable(R.drawable.list_selector));
         mListView.setAdapter(new ListAdapter());
+
+        mActionButton = (FloatingActionButton) findViewById(R.id.fab);
+        mActionButton.setBackground(getDrawable(R.drawable.fab_background));
+        mActionButton.setClickable(true);
+//        mActionButton.setOnTouchListener(new DrawableHotspotTouch((LollipopDrawable) mActionButton.getBackground()));
     }
 
-    @Override
-    public Resources getResources() {
-        if (mWrappedResources == null) {
-            mWrappedResources = new ResourcesCompat(super.getResources());
-        }
-
-        return mWrappedResources;
+    public Drawable getDrawable2(int id){
+        return LollipopDrawablesCompat.getDrawable(getResources(), id, getTheme());
     }
 
     static class ListAdapter extends BaseAdapter {

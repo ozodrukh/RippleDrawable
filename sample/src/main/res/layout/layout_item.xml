@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<dreamers.sample.CardViewWithBackgroundSupport
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <dreamers.sample.CardViewWithBackgroundSupport
-        android:background="@drawable/background_placeholder"
-        android:layout_gravity="center"
-        android:layout_width="192dp"
-        android:layout_height="192dp"/>
-
-    <dreamers.sample.FloatingActionButton
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_gravity="right|bottom"
-        android:layout_margin="16dp"
-        />
-
-</FrameLayout>
+    android:background="@drawable/background_placeholder"
+    android:layout_gravity="center"
+    android:layout_width="192dp"
+    android:layout_height="192dp"/>
