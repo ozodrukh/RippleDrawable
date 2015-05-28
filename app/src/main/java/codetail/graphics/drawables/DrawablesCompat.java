@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.annotation.DrawableRes;
 import android.support.v4.util.LongSparseArray;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -27,23 +28,7 @@ import java.util.Map;
 import codetail.graphics.compat.Android;
 
 
-/**
- * There is custom implementation of {@link Resources#getDrawable(int)} and
- * {@link Resources} loadDrawable methods, it needs to support custom xml tags defining
- *
- * to register custom Drawable tag follow the example below:
- * <pre>
- *     static{
- *          DrawablesCompat.registerDrawable(RippleDrawable.class, "ripple");
- *     }
- * </pre>
- *
- * There is also some helpful methods that {@link android.support.v4.graphics.drawable.DrawableCompat}
- * doesn't supported, if you want to create universal Drawables that all methods will works on both
- * 5.0 + and lower, extend your custom drawable from {@link LollipopDrawable}
- */
 public class DrawablesCompat {
-    private static final String TAG = "DrawablesCompat";
     private static final Object mAccessLock = new Object();
 
     private static final Map<String, Class<? extends Drawable>> CLASS_MAP = new HashMap<>();
@@ -74,13 +59,9 @@ public class DrawablesCompat {
         CLASS_MAP.remove(name);
     }
 
-    /**
-     * Sets all dependencies, that are necessary for {@link RippleDrawable} work
-     */
-    public static void installRippleDependencies(View target, boolean isInScrollContainer){
-        TouchTracker tracker = new TouchTracker();
-        tracker.setInsideScrollContainer(isInScrollContainer);
-        target.setOnTouchListener(tracker);
+    public static void setRippleDrawable(@DrawableRes int id, View target) {
+        target.setBackgroundResource(id);
+        target.setOnTouchListener(new TouchTracker());
     }
 
     /**
@@ -163,10 +144,6 @@ public class DrawablesCompat {
     public static Drawable createFromXmlInner(Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
         Drawable drawable = null;
         final String name = parser.getName();
-        if(name.contains("ripple")){
-            Log.i(TAG, "**** Creating RippleDrawable ****");
-        }
-
         try {
             Class<? extends Drawable> clazz = CLASS_MAP.get(name);
             if (clazz != null) {
@@ -204,9 +181,7 @@ public class DrawablesCompat {
 
     public static Drawable getDrawable(Resources res, int resid, Resources.Theme theme) {
 
-        //TODO remove
-        String resName = res.getResourceName(resid);
-        Log.i("ResourcesCompat", "Theme: " + theme.toString() + ", Resource name" + resName);
+        Log.i("ResourcesCompat", res.getResourceName(resid));
 
         TypedValue value = new TypedValue();
         res.getValue(resid, value, true);
@@ -342,20 +317,20 @@ public class DrawablesCompat {
         @Override
         public void applyTheme(Drawable drawable, Resources.Theme t) {
             if (drawable instanceof LollipopDrawable) {
-                ((LollipopDrawable) drawable).applyTheme(t);
+                drawable.applyTheme(t);
             }
         }
 
         @Override
         public boolean canApplyTheme(Drawable drawable) {
-            return drawable instanceof LollipopDrawable && ((LollipopDrawable) drawable).canApplyTheme();
+            return drawable instanceof LollipopDrawable && drawable.canApplyTheme();
         }
 
         @Override
         public void inflate(Drawable drawable, Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
 
             if (drawable instanceof LollipopDrawable) {
-                ((LollipopDrawable) drawable).inflate(r, parser, attrs, theme);
+                drawable.inflate(r, parser, attrs, theme);
                 return;
             }
 

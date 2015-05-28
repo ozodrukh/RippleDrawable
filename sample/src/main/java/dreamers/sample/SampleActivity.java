@@ -1,19 +1,21 @@
 package dreamers.sample;
 
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageButton;
 import android.widget.ListView;
 
-import codetail.graphics.compat.CompatActivity;
+import codetail.graphics.compat.ResourcesCompat;
 
-public class SampleActivity extends CompatActivity {
+public class SampleActivity extends ActionBarActivity {
 
-    private ListView mListView;
-    private ImageButton mFab;
+    ListView mListView;
+
+    ResourcesCompat mWrappedResources;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,10 +24,15 @@ public class SampleActivity extends CompatActivity {
 
         mListView = (ListView) findViewById(R.id.list);
         mListView.setAdapter(new ListAdapter());
-//        mListView.setSelector(R.drawable.list_selector);
+    }
 
-        mFab = (ImageButton) findViewById(R.id.fab);
-//        mFab.setBackgroundResource(R.drawable.fab_background);
+    @Override
+    public Resources getResources() {
+        if (mWrappedResources == null) {
+            mWrappedResources = new ResourcesCompat(super.getResources());
+        }
+
+        return mWrappedResources;
     }
 
     static class ListAdapter extends BaseAdapter {
