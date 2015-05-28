@@ -9,24 +9,11 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.TypedValue;
 
-import codetail.graphics.drawables.DrawablesCompat;
+import codetail.graphics.drawables.LollipopDrawablesCompat;
 
 import static android.util.TypedValue.TYPE_ATTRIBUTE;
 
 public class TypedArrayCompat {
-
-    /**
-     * Stolen from {@link android.content.res.AssetManager}, because they have
-     * in package visibility
-     */
-    /*package*/ static final int STYLE_NUM_ENTRIES = 6;
-    /*package*/ static final int STYLE_TYPE = 0;
-    /*package*/ static final int STYLE_DATA = 1;
-    /*package*/ static final int STYLE_ASSET_COOKIE = 2;
-    /*package*/ static final int STYLE_RESOURCE_ID = 3;
-    /*package*/ static final int STYLE_CHANGING_CONFIGURATIONS = 4;
-    /*package*/ static final int STYLE_DENSITY = 5;
-
     private static final int[] TEMP_ARRAY = new int[1];
 
     private final static ITypedArray IMPL;
@@ -47,7 +34,8 @@ public class TypedArrayCompat {
      * @param index Index of attribute to retrieve.
      * @return ColorStateList for the attribute, or null if not defined.
      */
-    public static ColorStateList getColorStateList(Resources.Theme theme, TypedArray a, TypedValue[] values, int index) {
+    public static ColorStateList getColorStateList(Resources.Theme theme, TypedArray a,
+                                                   TypedValue[] values, int index) {
         if (values != null && theme != null) {
             TypedValue v = values[index];
 
@@ -104,7 +92,7 @@ public class TypedArrayCompat {
         }
 
         if (a != null) {
-            return DrawablesCompat.getDrawable(a, index, theme);
+            return LollipopDrawablesCompat.getDrawable(a, index, theme);
         }
 
         return null;
@@ -161,7 +149,8 @@ public class TypedArrayCompat {
      * @see TypedArray#getDimension
      * @see TypedArray#getDimensionPixelSize
      */
-    public static int getDimensionPixelOffset(Resources.Theme theme, TypedArray a, TypedValue[] values, int index, int def) {
+    public static int getDimensionPixelOffset(Resources.Theme theme, TypedArray a, TypedValue[] values,
+                                              int index, int def) {
         if (values != null && theme != null) {
             TypedValue v = values[index];
 

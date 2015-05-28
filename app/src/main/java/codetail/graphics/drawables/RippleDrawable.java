@@ -45,7 +45,6 @@ import org.xmlpull.v1.XmlPullParserException;
 import java.io.IOException;
 import java.util.Arrays;
 
-import codetail.graphics.compat.DrawableUtils;
 import codetail.graphics.compat.TypedArrayCompat;
 import dreamers.graphics.R;
 
@@ -830,7 +829,9 @@ public class RippleDrawable extends LayerDrawable {
             // to push just the alpha channel into the paint and let the filter
             // handle the full-alpha color.
             final int fullAlphaColor = color | (0xFF << 24);
-            mMaskColorFilter = DrawableUtils.setColor(mMaskColorFilter, fullAlphaColor, PorterDuff.Mode.SRC_IN);
+            mMaskColorFilter = new PorterDuffColorFilter(fullAlphaColor, PorterDuff.Mode.SRC_IN);
+//DrawableReflectiveUtils.
+                    //setColor(mMaskColorFilter, fullAlphaColor, PorterDuff.Mode.SRC_IN);
 
             p.setColor(halfAlpha);
             p.setColorFilter(mMaskColorFilter);

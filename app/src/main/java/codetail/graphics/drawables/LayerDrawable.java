@@ -202,7 +202,7 @@ public class LayerDrawable extends LollipopDrawable implements Drawable.Callback
                 if (type != XmlPullParser.START_TAG) {
                     throw new XmlPullParserException(parser.getPositionDescription() + ": <item> tag requires a 'drawable' attribute or " + "child tag defining a drawable");
                 }
-                layer.mDrawable = DrawablesCompat.createFromXmlInner(r, parser, attrs, theme);
+                layer.mDrawable = LollipopDrawablesCompat.createFromXmlInner(r, parser, attrs, theme);
             }
 
             if (layer.mDrawable != null) {
@@ -258,8 +258,8 @@ public class LayerDrawable extends LollipopDrawable implements Drawable.Callback
             }
 
             final Drawable d = layer.mDrawable;
-            if (DrawablesCompat.canApplyTheme(d)) {
-                DrawablesCompat.applyTheme(d, t);
+            if (LollipopDrawablesCompat.canApplyTheme(d)) {
+                LollipopDrawablesCompat.applyTheme(d, t);
             }
         }
 
@@ -979,7 +979,7 @@ public class LayerDrawable extends LollipopDrawable implements Drawable.Callback
             final int N = mNum;
             for (int i = 0; i < N; i++) {
                 final ChildDrawable layer = array[i];
-                if (layer.mThemeAttrs != null || DrawablesCompat.canApplyTheme(layer.mDrawable)) {
+                if (layer.mThemeAttrs != null || LollipopDrawablesCompat.canApplyTheme(layer.mDrawable)) {
                     return true;
                 }
             }

@@ -6,9 +6,9 @@ import android.view.ViewConfiguration;
 
 import java.lang.ref.WeakReference;
 
-public class TouchTracker implements View.OnTouchListener{
+public class DrawableHotspotTouch implements View.OnTouchListener{
 
-    RippleDrawable mHotspotDrawable;
+    LollipopDrawable mHotspotDrawable;
 
     PerformClick mPerformClick;
     CheckForTap mPendingCheckForTap;
@@ -21,11 +21,11 @@ public class TouchTracker implements View.OnTouchListener{
     boolean mPrePressed;
     boolean mInsideScrollContainer;
 
-    public TouchTracker() {
+    public DrawableHotspotTouch() {
         this(null);
     }
 
-    public TouchTracker(RippleDrawable hotspot){
+    public DrawableHotspotTouch(LollipopDrawable hotspot){
         mHotspotDrawable = hotspot;
 
         mTouchSlop = -1;
@@ -95,10 +95,6 @@ public class TouchTracker implements View.OnTouchListener{
                     break;
 
                 case MotionEvent.ACTION_DOWN:
-                    if (mHotspotDrawable == null) { //lazy initialize if hotspot wasn't passed
-                        mHotspotDrawable = (RippleDrawable) v.getBackground();
-                    }
-
                     mHasPerformedLongPress = false;
 
                     if (mInsideScrollContainer) {

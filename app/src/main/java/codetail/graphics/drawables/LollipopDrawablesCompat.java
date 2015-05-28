@@ -8,13 +8,11 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.annotation.DrawableRes;
 import android.support.v4.util.LongSparseArray;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.util.TypedValue;
 import android.util.Xml;
-import android.view.View;
 
 import org.xmlpull.v1.XmlPullParser;
 import org.xmlpull.v1.XmlPullParserException;
@@ -28,7 +26,7 @@ import java.util.Map;
 import codetail.graphics.compat.Android;
 
 
-public class DrawablesCompat {
+public class LollipopDrawablesCompat {
     private static final Object mAccessLock = new Object();
 
     private static final Map<String, Class<? extends Drawable>> CLASS_MAP = new HashMap<>();
@@ -57,11 +55,6 @@ public class DrawablesCompat {
 
     public static void unregisterDrawable(String name) {
         CLASS_MAP.remove(name);
-    }
-
-    public static void setRippleDrawable(@DrawableRes int id, View target) {
-        target.setBackgroundResource(id);
-        target.setOnTouchListener(new TouchTracker());
     }
 
     /**
@@ -164,7 +157,8 @@ public class DrawablesCompat {
         return drawable;
     }
 
-    private static Drawable getCachedDrawable(LongSparseArray<WeakReference<Drawable.ConstantState>> cache, long key, Resources res) {
+    private static Drawable getCachedDrawable(LongSparseArray<WeakReference<Drawable.ConstantState>> cache,
+                                              long key, Resources res) {
         synchronized (mAccessLock) {
             WeakReference<Drawable.ConstantState> wr = cache.get(key);
             if (wr != null) {
@@ -180,9 +174,6 @@ public class DrawablesCompat {
     }
 
     public static Drawable getDrawable(Resources res, int resid, Resources.Theme theme) {
-
-        Log.i("ResourcesCompat", res.getResourceName(resid));
-
         TypedValue value = new TypedValue();
         res.getValue(resid, value, true);
         return loadDrawable(res, value, theme);
@@ -276,20 +267,20 @@ public class DrawablesCompat {
         if (file.endsWith(".xml")) {
             try {
                 XmlResourceParser rp = res.getAssets().openXmlResourceParser(value.assetCookie, file);
-                dr = DrawablesCompat.createFromXml(res, rp, theme);
+                dr = LollipopDrawablesCompat.createFromXml(res, rp, theme);
                 rp.close();
             } catch (Exception e) {
-                Log.w(DrawablesCompat.class.getSimpleName(), "Failed to load drawable resource, " + "using a fallback...", e);
+                Log.w(LollipopDrawablesCompat.class.getSimpleName(), "Failed to load drawable resource, " + "using a fallback...", e);
                 return res.getDrawable(value.resourceId);
             }
 
         } else {
             try {
                 InputStream is = res.getAssets().openNonAssetFd(value.assetCookie, file).createInputStream();
-                dr = DrawablesCompat.createFromResourceStream(res, value, is, file, null);
+                dr = LollipopDrawablesCompat.createFromResourceStream(res, value, is, file, null);
                 is.close();
             } catch (Exception e) {
-                Log.w(DrawablesCompat.class.getSimpleName(), "Failed to load drawable resource, " + "using a fallback...", e);
+                Log.w(LollipopDrawablesCompat.class.getSimpleName(), "Failed to load drawable resource, " + "using a fallback...", e);
                 return res.getDrawable(value.resourceId);
             }
         }
@@ -317,20 +308,20 @@ public class DrawablesCompat {
         @Override
         public void applyTheme(Drawable drawable, Resources.Theme t) {
             if (drawable instanceof LollipopDrawable) {
-                drawable.applyTheme(t);
+                ((LollipopDrawable) drawable).applyTheme(t);
             }
         }
 
         @Override
         public boolean canApplyTheme(Drawable drawable) {
-            return drawable instanceof LollipopDrawable && drawable.canApplyTheme();
+            return drawable instanceof LollipopDrawable && ((LollipopDrawable) drawable).canApplyTheme();
         }
 
         @Override
         public void inflate(Drawable drawable, Resources r, XmlPullParser parser, AttributeSet attrs, Resources.Theme theme) throws XmlPullParserException, IOException {
 
             if (drawable instanceof LollipopDrawable) {
-                drawable.inflate(r, parser, attrs, theme);
+                ((LollipopDrawable) drawable).inflate(r, parser, attrs, theme);
                 return;
             }
 
