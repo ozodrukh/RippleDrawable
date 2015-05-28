@@ -1,6 +1,5 @@
 package codetail.graphics.compat;
 
-import android.content.Context;
 import android.content.res.AssetManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
@@ -12,18 +11,10 @@ import codetail.graphics.drawables.DrawablesCompat;
 
 public class ResourcesCompat extends Resources {
 
-    private Theme mTheme;
-    private Resources mBase;
-
-    public ResourcesCompat(Context context){
-        this(context.getResources());
-
-//        mTheme = context.getTheme();
-    }
+    Theme mTheme;
 
     public ResourcesCompat(Resources resources) {
         this(resources.getAssets(), resources.getDisplayMetrics(), resources.getConfiguration());
-        mBase = resources;
     }
 
     public void setTheme(Theme theme) {
@@ -50,12 +41,12 @@ public class ResourcesCompat extends Resources {
     @Nullable
     @Override
     public Drawable getDrawable(int id) throws NotFoundException {
-        return DrawablesCompat.getDrawable(mBase, id, mTheme);
+        return getDrawable(id, null);
     }
 
     @Nullable
     @Override
     public Drawable getDrawable(int id, Theme theme) throws NotFoundException {
-        return DrawablesCompat.getDrawable(mBase, id, theme);
+        return DrawablesCompat.getDrawable(this, id, theme);
     }
 }
