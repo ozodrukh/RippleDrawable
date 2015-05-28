@@ -66,6 +66,24 @@ public class SampleActivity extends AppCompatActivity {
 
 **Thats it!**
 
+##Dependency
+
+root build.gradle add a repository 
+```groovy
+    repositories {
+        maven {
+            url "https://jitpack.io"
+        }
+    }
+```
+
+and in application module just add
+```groovy 
+    dependencies {
+            compile 'com.github.ozodrukh:RippleDrawable:2.0.0'
+    }
+```
+
 #### a little bit more
 
 you can inflate and create your own `Drawable`classes, here is tips & tricks
