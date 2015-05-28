@@ -9,6 +9,8 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 
+import codetail.graphics.drawables.DrawableHotspotTouch;
+import codetail.graphics.drawables.LollipopDrawable;
 import codetail.graphics.drawables.LollipopDrawablesCompat;
 
 public class SampleActivity extends ActionBarActivity {
@@ -22,13 +24,14 @@ public class SampleActivity extends ActionBarActivity {
         setContentView(R.layout.activity_sample);
 
         mListView = (ListView) findViewById(R.id.list);
-        mListView.setSelector(getDrawable(R.drawable.list_selector));
+        mListView.setSelector(getDrawable2(R.drawable.list_selector));
         mListView.setAdapter(new ListAdapter());
 
         mActionButton = (FloatingActionButton) findViewById(R.id.fab);
-        mActionButton.setBackground(getDrawable(R.drawable.fab_background));
+        mActionButton.setBackgroundDrawable(getDrawable2(R.drawable.fab_background));
         mActionButton.setClickable(true);
-//        mActionButton.setOnTouchListener(new DrawableHotspotTouch((LollipopDrawable) mActionButton.getBackground()));
+        mActionButton.setOnTouchListener(
+                new DrawableHotspotTouch((LollipopDrawable) mActionButton.getBackground()));
     }
 
     public Drawable getDrawable2(int id){
