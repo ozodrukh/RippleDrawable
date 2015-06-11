@@ -1,9 +1,9 @@
 
 *RippleDrawable*
 =============
-This repository contains post of Android `<ripple>` effect for pre lollipop devices with android 14 + (ICS+)
+Port of Android `<ripple>` effect for pre lollipop devices with android 14 + (ICS+)
 
-(well, since NineOldAndroids is deprecated, this library become 14 + only, furthermore gingerbread devices is not spread now)
+(well, since NineOldAndroids is deprecated, this library become 14 + only)
 
 ### Features
 1. XML inflating
