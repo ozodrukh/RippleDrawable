@@ -80,7 +80,7 @@ root build.gradle add a repository
 and in application module just add
 ```groovy 
     dependencies {
-            compile 'com.github.ozodrukh:RippleDrawable:2.0.0'
+            compile 'com.github.ozodrukh:RippleDrawable:2.0.1'
     }
 ```
 
